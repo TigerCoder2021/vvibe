@@ -1,61 +1,50 @@
 import React from 'react';
+import {
+  ChevronRightIcon,
+  UserIcon,
+  BellIcon,
+  SupportIcon,
+  DocumentIcon,
+  SubscriptionIcon,
+  LogoutIcon
+} from '@components/icons/CommonIcons';
 
-const ChevronRightIcon = () => (
-  <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-  </svg>
-);
+interface ProfileScreenProps {
+  onNavigateToSubscription?: () => void;
+}
 
-const UserIcon = () => (
-  <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-  </svg>
-);
+const ProfileScreen: React.FC<ProfileScreenProps> = ({ onNavigateToSubscription }) => {
+  const handleMenuClick = (label: string) => {
+    if (label === '구독 관리' && onNavigateToSubscription) {
+      onNavigateToSubscription();
+    }
+    // TODO: 다른 메뉴 아이템 처리
+  };
 
-const BellIcon = () => (
-  <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-  </svg>
-);
-
-const SupportIcon = () => (
-  <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-  </svg>
-);
-
-const DocumentIcon = () => (
-  <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-  </svg>
-);
-
-const LogoutIcon = () => (
-  <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-  </svg>
-);
-
-const ProfileScreen: React.FC = () => {
   const menuItems = [
     { 
+      label: '구독 관리', 
+      icon: <SubscriptionIcon className="w-5 h-5 text-gray-400" />,
+      description: '인플루언서 구독 및 플랜 관리'
+    },
+    { 
       label: '계정 정보', 
-      icon: <UserIcon />,
+      icon: <UserIcon className="w-5 h-5 text-gray-400" />,
       description: '프로필 및 개인정보 관리'
     },
     { 
       label: '알림 설정', 
-      icon: <BellIcon />,
+      icon: <BellIcon className="w-5 h-5 text-gray-400" />,
       description: '푸시 알림 및 메시지 설정'
     },
     { 
       label: '고객센터 / 문의하기', 
-      icon: <SupportIcon />,
+      icon: <SupportIcon className="w-5 h-5 text-gray-400" />,
       description: '도움말 및 문의사항'
     },
     { 
       label: '이용약관 및 정책', 
-      icon: <DocumentIcon />,
+      icon: <DocumentIcon className="w-5 h-5 text-gray-400" />,
       description: '서비스 이용약관 및 개인정보처리방침'
     },
   ];
@@ -95,7 +84,8 @@ const ProfileScreen: React.FC = () => {
           {menuItems.map((item, index) => (
             <div 
               key={item.label} 
-              className="flex items-center justify-between px-4 py-4 hover:bg-gray-900/50 transition-colors cursor-pointer"
+              className="flex items-center justify-between px-4 py-2 hover:bg-gray-900/50 transition-colors cursor-pointer"
+              onClick={() => handleMenuClick(item.label)}
             >
               <div className="flex items-center space-x-3">
                 <div className="text-gray-400">
@@ -106,7 +96,7 @@ const ProfileScreen: React.FC = () => {
                   <p className="text-xs text-gray-500">{item.description}</p>
                 </div>
               </div>
-              <ChevronRightIcon />
+              <ChevronRightIcon className="w-5 h-5 text-gray-400" />
             </div>
           ))}
         </div>
@@ -116,20 +106,20 @@ const ProfileScreen: React.FC = () => {
           <button className="w-full flex items-center justify-between px-4 py-4 text-left hover:bg-gray-900/50 transition-colors">
             <div className="flex items-center space-x-3">
               <div className="text-red-400">
-                <LogoutIcon />
+                <LogoutIcon className="w-5 h-5 text-red-400" />
               </div>
               <div>
                 <p className="font-medium text-red-400">로그아웃</p>
                 <p className="text-xs text-gray-500">계정에서 안전하게 로그아웃</p>
               </div>
             </div>
-            <ChevronRightIcon />
+            <ChevronRightIcon className="w-5 h-5 text-gray-400" />
           </button>
         </div>
         
         {/* 앱 정보 */}
         <div className="text-center py-6 mt-4">
-          <p className="text-xs text-gray-600">VVibe v1.0.0</p>
+          <p className="text-xs text-gray-600">FanVoice v1.0.0</p>
         </div>
       </main>
     </div>

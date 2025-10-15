@@ -21,7 +21,7 @@ src/
 │   │   ├── auth/       # 인증 관련 (LoginScreen, TermsAgreementScreen, AgeConsentScreen, BirthdayModal)
 │   │   ├── onboarding/ # 온보딩 (OnboardingScreen)
 │   │   ├── home/       # 홈 화면 (HomeScreen)
-│   │   ├── chat/       # 채팅 (ChatListScreen, ChatRoom)
+│   │   ├── chat/       # 대화 (ChatListScreen, ChatRoom)
 │   │   └── profile/    # 프로필 (ProfileScreen, InfluencerProfileModal)
 │   └── icons/          # SVG 아이콘 컴포넌트
 ├── hooks/              # Custom React Hooks
@@ -192,8 +192,8 @@ export const ROUTES = {
 - 프로필 상세 정보
 - 팔로우 기능
 
-### 3. 채팅
-- 실시간 채팅
+### 3. 대화
+- 실시간 대화
 - TTS 음성 재생
 - 메시지 히스토리
 

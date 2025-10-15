@@ -7,6 +7,8 @@ import HomeScreen from '@screens/home/HomeScreen';
 import ChatListScreen from '@screens/chat/ChatListScreen';
 import ChatRoom from '@screens/chat/ChatRoom';
 import ProfileScreen from '@screens/profile/ProfileScreen';
+import CreditRechargeScreen from '@screens/credit/CreditRechargeScreen';
+import SubscriptionScreen from '@screens/subscription/SubscriptionScreen';
 import BottomNavBar from '@components/layout/BottomNavBar';
 import type { MainTab } from '@/types/navigation';
 import type { Influencer } from '@/types/influencer';
@@ -14,11 +16,13 @@ import { getMockInfluencerById } from '@/constants/mockData';
 
 // 임시 라우팅 타입
 type AuthFlow = 'login' | 'ageConsent' | 'termsAgreement' | 'onboarding' | 'main';
+type ModalScreen = 'creditRecharge' | 'subscription' | null;
 
 const App: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<AuthFlow>('login');
   const [mainTab, setMainTab] = useState<MainTab>('HOME');
   const [selectedChatId, setSelectedChatId] = useState<string | null>(null);
+  const [modalScreen, setModalScreen] = useState<ModalScreen>(null);
 
   // 로그인 플로우 핸들러
   const handleSocialLogin = () => {
@@ -37,7 +41,7 @@ const App: React.FC = () => {
     setCurrentScreen('main');
   };
 
-  // 채팅 핸들러
+  // 대화 핸들러
   const handleChatSelect = (chatId: string) => {
     setSelectedChatId(chatId);
   };
@@ -46,9 +50,31 @@ const App: React.FC = () => {
     setSelectedChatId(null);
   };
 
+  // 모달 화면 네비게이션 핸들러
+  const handleNavigateToCreditRecharge = () => {
+    setModalScreen('creditRecharge');
+  };
+
+  const handleNavigateToSubscription = () => {
+    setModalScreen('subscription');
+  };
+
+  const handleCloseModal = () => {
+    setModalScreen(null);
+  };
+
   // 메인 앱 렌더링
   const renderMainApp = () => {
-    // 채팅방이 선택된 경우
+    // 모달 화면이 있는 경우 우선 렌더링
+    if (modalScreen === 'creditRecharge') {
+      return <CreditRechargeScreen onBack={handleCloseModal} currentCredits={1250} />;
+    }
+
+    if (modalScreen === 'subscription') {
+      return <SubscriptionScreen onBack={handleCloseModal} />;
+    }
+
+    // 대화방이 선택된 경우
     if (mainTab === 'CHAT' && selectedChatId) {
       const influencer = getMockInfluencerById(selectedChatId);
       return (
@@ -62,15 +88,15 @@ const App: React.FC = () => {
     return (
       <div className="h-full bg-black text-white relative">
         <main className="h-full">
-          {mainTab === 'HOME' && <HomeScreen />}
+          {mainTab === 'HOME' && <HomeScreen onNavigateToCreditRecharge={handleNavigateToCreditRecharge} />}
           {mainTab === 'CHAT' && <ChatListScreen onChatSelect={handleChatSelect} />}
-          {mainTab === 'PROFILE' && <ProfileScreen />}
+          {mainTab === 'PROFILE' && <ProfileScreen onNavigateToSubscription={handleNavigateToSubscription} />}
         </main>
         <BottomNavBar 
           activeTab={mainTab} 
           setActiveTab={(tab) => {
             setMainTab(tab);
-            setSelectedChatId(null); // 탭 변경 시 채팅방 닫기
+            setSelectedChatId(null); // 탭 변경 시 대화방 닫기
           }} 
         />
       </div>

@@ -117,7 +117,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({
               <button
                 onClick={() => setIsVoiceMode(true)}
                 className="ml-2 p-2 bg-white hover:bg-gray-100 rounded-full transition-colors"
-                aria-label="음성 채팅"
+                aria-label="음성 대화"
               >
                 <VoiceWaveIcon className="w-4 h-4 text-black" />
               </button>

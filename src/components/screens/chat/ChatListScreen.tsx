@@ -36,7 +36,7 @@ const ChatListScreen: React.FC<ChatListScreenProps> = ({ onChatSelect }) => {
         {showSearch ? (
           <div className="flex-1">
             <SearchBar 
-              placeholder="채팅방 검색..." 
+              placeholder="대화방 검색..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onClose={handleSearchClose}

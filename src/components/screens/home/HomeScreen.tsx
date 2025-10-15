@@ -3,15 +3,26 @@ import InfluencerProfileModal from '@screens/profile/InfluencerProfileModal';
 import type { Influencer } from '@/types/influencer';
 import { mockInfluencers } from '@/constants/mockData';
 import { SearchIcon } from '@components/icons/NavigationIcons';
+import { CreditIcon } from '@components/icons/CommonIcons';
 import { SearchBar } from '@components/common';
 
-const HomeScreen: React.FC = () => {
+interface HomeScreenProps {
+  onNavigateToCreditRecharge?: () => void;
+}
+
+const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigateToCreditRecharge }) => {
   const [selectedInfluencer, setSelectedInfluencer] = useState<Influencer | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   
   const popularInfluencers = mockInfluencers.filter(inf => inf.isVerified).slice(0, 3);
+
+  const handleCreditRecharge = () => {
+    if (onNavigateToCreditRecharge) {
+      onNavigateToCreditRecharge();
+    }
+  };
 
   // 검색 필터링
   const filteredInfluencers = useMemo(() => {
@@ -60,15 +71,25 @@ const HomeScreen: React.FC = () => {
         ) : (
           <>
             <h1 className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 font-montserrat font-black italic">
-              vvibe
+              FanVoice
             </h1>
-            <button 
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-              aria-label="검색"
-              onClick={handleSearchOpen}
-            >
-              <SearchIcon className="w-6 h-6 text-gray-400" />
-            </button>
+            <div className="flex items-center space-x-2">
+              <button 
+                className="flex items-center space-x-1 px-3 py-1.5 bg-gradient-to-r from-orange-500 to-orange-800 rounded-full text-sm font-medium text-gray-200 hover:from-yellow-400 hover:to-orange-400 transition-all"
+                aria-label="크레딧 충전"
+                onClick={handleCreditRecharge}
+              >
+                <CreditIcon className="w-5 h-5" />
+                <span>1,250</span>
+              </button>
+              <button 
+                className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                aria-label="검색"
+                onClick={handleSearchOpen}
+              >
+                <SearchIcon className="w-6 h-6 text-gray-400" />
+              </button>
+            </div>
           </>
         )}
       </header>

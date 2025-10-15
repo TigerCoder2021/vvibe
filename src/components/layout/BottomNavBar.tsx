@@ -10,7 +10,7 @@ interface BottomNavBarProps {
 const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeTab, setActiveTab }) => {
   const navItems = [
     { id: 'HOME' as MainTab, icon: HomeIcon, label: '홈' },
-    { id: 'CHAT' as MainTab, icon: ChatIcon, label: '채팅' },
+    { id: 'CHAT' as MainTab, icon: ChatIcon, label: '대화' },
     { id: 'PROFILE' as MainTab, icon: ProfileIcon, label: '프로필' },
   ];
 

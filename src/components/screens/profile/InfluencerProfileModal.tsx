@@ -92,10 +92,10 @@ const InfluencerProfileModal: React.FC<InfluencerProfileModalProps> = ({ influen
           {/* Footer - Chat Button */}
           <div className="p-3 border-t border-gray-800">
             <button 
-              onClick={() => console.log('채팅 시작')}
+              onClick={() => console.log('대화 시작')}
               className="w-full h-12 font-bold rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-transform transform hover:scale-[1.02] active:scale-95"
             >
-              채팅 시작하기
+              대화 시작하기
             </button>
           </div>
         </div>

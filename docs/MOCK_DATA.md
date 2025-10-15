@@ -22,7 +22,7 @@ const HomeScreen = () => {
 ```
 
 ### 2. mockChatList
-채팅 목록 데이터
+대화 목록 데이터
 
 ```typescript
 import { mockChatList } from '@/constants/mockData';
@@ -34,7 +34,7 @@ const ChatListScreen = () => {
 ```
 
 ### 3. mockMessages
-채팅 메시지 데이터
+대화 메시지 데이터
 
 ```typescript
 import { mockMessages } from '@/constants/mockData';
@@ -58,7 +58,7 @@ const influencer = getMockInfluencerById('1');
 ```
 
 ### getMockChatById
-특정 ID의 채팅 가져오기
+특정 ID의 대화 가져오기
 
 ```typescript
 import { getMockChatById } from '@/constants/mockData';

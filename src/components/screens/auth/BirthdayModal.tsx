@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { getMaxDaysInMonth } from '@/utils/formatDate';
 
 interface BirthdayModalProps {
   isOpen: boolean;
@@ -16,16 +17,20 @@ const BirthdayModal: React.FC<BirthdayModalProps> = ({ isOpen, onClose, onConfir
   const dayRef = useRef<HTMLDivElement>(null);
 
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  // 선택된 월에 따른 최대 일 수 계산
+  const maxDays = getMaxDaysInMonth(month);
+  const days = Array.from({ length: maxDays }, (_, i) => i + 1);
 
   const ITEM_HEIGHT = 36; // Corresponds to h-9 in Tailwind
 
   const scrollToInitialValue = useCallback(() => {
     if (monthRef.current) {
-      monthRef.current.scrollTop = (month - 1) * ITEM_HEIGHT;
+      // month 값이 selectedIndex와 동일하므로 그대로 사용
+      monthRef.current.scrollTop = month * ITEM_HEIGHT;
     }
     if (dayRef.current) {
-      dayRef.current.scrollTop = (day - 1) * ITEM_HEIGHT;
+      // day 값이 selectedIndex와 동일하므로 그대로 사용
+      dayRef.current.scrollTop = day * ITEM_HEIGHT;
     }
   }, [month, day]);
 
@@ -37,12 +42,36 @@ const BirthdayModal: React.FC<BirthdayModalProps> = ({ isOpen, onClose, onConfir
   }, [isOpen, scrollToInitialValue]);
 
 
-  const handleScroll = (ref: React.RefObject<HTMLDivElement>, setter: React.Dispatch<React.SetStateAction<number>>) => {
+  const handleScroll = (ref: React.RefObject<HTMLDivElement>, setter: React.Dispatch<React.SetStateAction<number>>, type: 'month' | 'day') => {
     if (!ref.current) return;
     const scrollTop = ref.current.scrollTop;
     const selectedIndex = Math.round(scrollTop / ITEM_HEIGHT);
-    setter(selectedIndex + 1);
+    // selectedIndex가 정확한 월/일 값
+    const newValue = selectedIndex;
+    
+    // 유효한 범위 체크 및 상태 업데이트
+    if (type === 'month' && newValue >= 1 && newValue <= 12) {
+      setter(newValue);
+    } else if (type === 'day') {
+      const maxDays = getMaxDaysInMonth(month);
+      if (newValue >= 1 && newValue <= maxDays) {
+        setter(newValue);
+      }
+    }
   };
+
+  // 월이 변경될 때 일이 최대값을 초과하면 조정
+  useEffect(() => {
+    const maxDays = getMaxDaysInMonth(month);
+    if (day > maxDays) {
+      setDay(maxDays);
+      // 스크롤 위치도 조정
+      if (dayRef.current) {
+        dayRef.current.scrollTop = maxDays * ITEM_HEIGHT;
+      }
+    }
+  }, [month, day]);
+  
   
   const debounce = (func: (...args: any[]) => void, delay: number) => {
     // FIX: Replaced NodeJS.Timeout with ReturnType<typeof setTimeout> for browser compatibility.
@@ -53,8 +82,8 @@ const BirthdayModal: React.FC<BirthdayModalProps> = ({ isOpen, onClose, onConfir
     };
   };
 
-  const debouncedMonthScroll = debounce(() => handleScroll(monthRef, setMonth), 150);
-  const debouncedDayScroll = debounce(() => handleScroll(dayRef, setDay), 150);
+  const debouncedMonthScroll = debounce(() => handleScroll(monthRef, setMonth, 'month'), 150);
+  const debouncedDayScroll = debounce(() => handleScroll(dayRef, setDay, 'day'), 150);
 
 
   if (!isOpen) return null;

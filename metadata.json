@@ -1,5 +1,5 @@
 {
-  "name": "vvibe - AI 인플루언서 채팅",
-  "description": "vvibe는 사용자가 좋아하는 인플루언서의 목소리를 모델로 한 AI TTS 음성 및 텍스트와 상호 작용할 수 있는 채팅 애플리케이션입니다.",
+  "name": "vvibe - AI 인플루언서 대화",
+  "description": "vvibe는 사용자가 좋아하는 인플루언서의 목소리를 모델로 한 AI TTS 음성 및 텍스트와 상호 작용할 수 있는 대화 애플리케이션입니다.",
   "requestFramePermissions": []
 }

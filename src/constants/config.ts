@@ -1,6 +1,6 @@
 // Application configuration
 export const APP_CONFIG = {
-  APP_NAME: 'VVibe',
+  APP_NAME: 'FanVoice',
   APP_VERSION: '1.0.0',
   MIN_AGE: 14,
   MAX_MESSAGE_LENGTH: 500,

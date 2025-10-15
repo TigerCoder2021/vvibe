@@ -5,3 +5,5 @@
 
 export * from './SocialIcons';
 export * from './NavigationIcons';
+export * from './CommonIcons';
+export * from './CommonIcons';

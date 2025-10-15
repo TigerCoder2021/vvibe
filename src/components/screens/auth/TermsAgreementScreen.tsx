@@ -46,7 +46,7 @@ const TermsAgreementScreen: React.FC<TermsAgreementScreenProps> = ({ onAgree }) 
       <div className="flex-grow flex flex-col justify-center">
         <div className="w-full max-w-sm mx-auto">
           <h1 className="text-2xl font-bold text-white mb-6 text-center">
-            vvibe 서비스 약관 동의
+            FanVoice 서비스 약관 동의
           </h1>
 
           <div className="space-y-3">

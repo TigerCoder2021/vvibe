@@ -1,6 +1,6 @@
 /**
  * VoiceChatModal Component
- * 전체 화면 음성 채팅 모달 (ChatGPT 스타일)
+ * 전체 화면 음성 대화 모달 (ChatGPT 스타일)
  */
 
 import React, { useState, useEffect } from 'react';

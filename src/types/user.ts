@@ -3,7 +3,9 @@ export interface User {
   id: string;
   name: string;
   email?: string;
+  handle?: string; // @username
   profileImage?: string;
+  credits: number;
   createdAt: Date;
 }
 
