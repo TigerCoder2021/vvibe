@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-const TermsAgreementScreen: React.FC = () => {
+interface TermsAgreementScreenProps {
+  onAgree: () => void;
+}
+
+const TermsAgreementScreen: React.FC<TermsAgreementScreenProps> = ({ onAgree }) => {
   const [agreements, setAgreements] = useState({
     termsOfService: false,
     privacyPolicy: false,
@@ -30,6 +34,12 @@ const TermsAgreementScreen: React.FC = () => {
   };
 
   const isRequiredAgreed = agreements.termsOfService && agreements.privacyPolicy;
+
+  const handleContinue = () => {
+    if (isRequiredAgreed) {
+      onAgree();
+    }
+  };
 
   return (
     <div className="flex flex-col h-full p-6 bg-gradient-to-b from-gray-900 via-gray-900 to-black">
@@ -78,8 +88,9 @@ const TermsAgreementScreen: React.FC = () => {
       </div>
       <div className="pb-4">
         <button
+          onClick={handleContinue}
           disabled={!isRequiredAgreed}
-          className={`w-full max-w-sm mx-auto h-12 font-bold rounded-lg transition-all duration-300 transform hover:scale-105 ${
+          className={`w-full h-12 font-bold rounded-lg transition-all duration-300 transform hover:scale-105 ${
             isRequiredAgreed
               ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white'
               : 'bg-gray-700 text-gray-500 cursor-not-allowed'

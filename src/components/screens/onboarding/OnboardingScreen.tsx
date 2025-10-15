@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import BirthdayModal from './BirthdayModal';
+import BirthdayModal from '@screens/auth/BirthdayModal';
 
-const OnboardingScreen: React.FC = () => {
+interface OnboardingScreenProps {
+  onComplete: () => void;
+}
+
+const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }) => {
   const [nickname, setNickname] = useState('');
   const [birthMonth, setBirthMonth] = useState('');
   const [birthDay, setBirthDay] = useState('');
@@ -94,6 +98,7 @@ const OnboardingScreen: React.FC = () => {
         </div>
         <div className="pb-4">
           <button
+            onClick={onComplete}
             disabled={!isFormValid}
             className={`w-full max-w-sm mx-auto h-12 font-bold rounded-lg transition-all duration-300 transform hover:scale-105 ${
               isFormValid

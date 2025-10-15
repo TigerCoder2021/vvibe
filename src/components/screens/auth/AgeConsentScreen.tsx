@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 
-const AgeConsentScreen: React.FC = () => {
+interface AgeConsentScreenProps {
+  onConsent: () => void;
+}
+
+const AgeConsentScreen: React.FC<AgeConsentScreenProps> = ({ onConsent }) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  const handleContinue = () => {
+    if (isChecked) {
+      onConsent();
+    }
+  };
 
   return (
     <div className="flex flex-col h-full p-6 bg-gradient-to-b from-gray-900 via-gray-900 to-black">
@@ -28,6 +38,7 @@ const AgeConsentScreen: React.FC = () => {
           </div>
 
           <button
+            onClick={handleContinue}
             disabled={!isChecked}
             className={`w-full h-12 font-bold rounded-lg transition-all duration-300 transform hover:scale-105 ${
               isChecked

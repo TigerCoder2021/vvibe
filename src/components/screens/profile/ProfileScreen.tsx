@@ -16,8 +16,10 @@ const ProfileScreen: React.FC = () => {
 
   return (
     <div className="h-full bg-black text-white">
-      <header className="sticky top-0 bg-black/80 backdrop-blur-sm p-4 border-b border-gray-800">
-        <h1 className="text-xl font-bold text-center">프로필</h1>
+      <header className="sticky top-0 z-10 flex bg-black/80 backdrop-blur-sm p-4">
+        <h1 className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500" style={{ fontFamily: 'Montserrat', fontWeight: 900, fontStyle: 'italic' }}>
+          more
+        </h1>
       </header>
       
       <div className="p-4 flex items-center space-x-4">
