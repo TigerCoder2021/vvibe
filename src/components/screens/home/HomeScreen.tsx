@@ -59,7 +59,7 @@ const HomeScreen: React.FC = () => {
           </div>
         ) : (
           <>
-            <h1 className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500" style={{ fontFamily: 'Montserrat', fontWeight: 900, fontStyle: 'italic' }}>
+            <h1 className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 font-montserrat font-black italic">
               vvibe
             </h1>
             <button 

@@ -10,7 +10,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onSocialLogin }) => {
     <div className="flex flex-col h-full p-6 bg-gradient-to-b from-gray-900 via-gray-900 to-black">
       {/* 로고 영역 - 상단 중앙 */}
       <div className="flex-1 flex flex-col justify-center items-center text-center">
-        <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-2 animate-pulse" style={{ fontFamily: 'Montserrat', fontWeight: 900, fontStyle: 'italic' }}>
+        <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-2 animate-pulse font-montserrat italic">
           vvibe
         </h1>
         <p className="text-gray-400">당신이 좋아하는 인플루언서와 대화하세요</p>
